@@ -44,10 +44,10 @@ Here's a walkthrough of implemented user stories:
 
 ## Reflection Questions
 1. If you used any outside resources to help complete your submission (websites, books, people, etc) list them here. 
-[YOUR ANSWER HERE]
+GeeksforGeeks, Stackoverflow
 
 2. What was a challenge you encountered in creating this submission (be specific)? How did you overcome it? (recommended 200 - 400 words) 
-[YOUR ANSWER HERE]
+One challenge I encountered was trying to implement the timer function. My logic for the timer is: whenever the player is able to guess the pattern correctly, then the timer would reset back to the original time. When I ran the project, I realized that the timer kept increasing and increasing. It would eventually go so fast that the player was not able to react fast enough to click the buttons. I looked through the documentation and realized I had to clear the interval. When I cleared the interval it became a lot better and managable. I also had issues with the order of the code. At first, I placed the update timer function below the guessCounter++. This was a mistake since it would keep updating the timer every time the user had made a guess.
 
 3. What questions about web development do you have after completing your submission? (recommended 100 - 300 words) 
 [YOUR ANSWER HERE]
