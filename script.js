@@ -13,7 +13,7 @@ const nextClueWaitTime = 1000; //how long to wait before starting playback of th
 var guessCounter = 0;
 
 var timer;
-var timeRemaining = 60;
+var timeRemaining;
 
 var delay = 0;
 
