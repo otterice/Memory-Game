@@ -12,6 +12,11 @@ const nextClueWaitTime = 1000; //how long to wait before starting playback of th
 
 var guessCounter = 0;
 
+var timer;
+var timeRemaining = 60;
+
+var delay = 0;
+
 function startGame(){
     //initialize game variables
     progress = 0;
@@ -21,12 +26,28 @@ function startGame(){
   document.getElementById("startBtn").classList.add("hidden");
   document.getElementById("stopBtn").classList.remove("hidden");
   
+  startTimer();
+    
   playClueSequence();
+}
+
+function update() {
+  timeRemaining = timeRemaining - 1;
+  if (timeRemaining >= 0) {
+    document.getElementById("timer").innerHTML = ("Timer: " + timeRemaining);
+  }
+  else {
+    loseGame();
+  }
 }
 
 function stopGame(){
     //initialize game variables
     gamePlaying = false;
+  
+  clearInterval(timer);
+  
+  timeRemaining = 30;
   
   // swap the Start and Stop buttons
   document.getElementById("startBtn").classList.remove("hidden");
@@ -97,12 +118,13 @@ function playSingleClue(btn){
 
 function playClueSequence(){
   guessCounter = 0;
-  let delay = nextClueWaitTime; //set delay to initial wait time
+  delay = nextClueWaitTime; //set delay to initial wait time
   for(let i=0;i<=progress;i++){ // for each clue that is revealed so far
     console.log("play single clue: " + pattern[i] + " in " + delay + "ms")
     setTimeout(playSingleClue,delay,pattern[i]) // set a timeout to play that clue
     delay += clueHoldTime 
     delay += cluePauseTime;
+    console.log(delay);
   }
 }
 
@@ -123,6 +145,7 @@ function guess(btn){
         //Pattern correct. Add next segment
         progress++;
         playClueSequence();
+        startTimer();
       }
     }else{
       //so far so good... check the next guess
@@ -134,3 +157,10 @@ function guess(btn){
     loseGame();
   }
 }    
+
+function startTimer() {
+  clearInterval(timer);
+  timeRemaining = 60;
+  timer = setInterval(update, 1000);
+  update();
+}
